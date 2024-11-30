@@ -4,7 +4,7 @@ import logger from "./utils/winston.logger";
 
 const port = config.server.port || 4000;
 
-(async () => {
+const run = async () => {
     try {
         app.listen(port, () => {
             logger.info(`Server running at http://localhost:${port}`);
@@ -13,4 +13,6 @@ const port = config.server.port || 4000;
         logger.error("Failed to start server", { error });
         process.exit(1);
     }
-})();
+};
+
+run();
