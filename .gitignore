@@ -2,7 +2,7 @@
 node_modules/
 
 # TypeScript compiled output
-# dist/
+dist/
 build/
 
 # Logs
@@ -80,7 +80,7 @@ Thumbs.db
 
 # Nuxt.js build / generate output
 .nuxt
-# dist
+dist
 
 # Gatsby files
 .cache/
