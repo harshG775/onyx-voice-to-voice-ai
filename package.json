@@ -3,6 +3,9 @@
     "version": "1.0.0",
     "description": "A starter template for Express.js with TypeScript",
     "main": "dist/index.js",
+    "engines":{
+        "node":"18.x"
+    },
     "scripts": {
         "start": "node dist/index.js",
         "dev": "nodemon src/index.ts",
