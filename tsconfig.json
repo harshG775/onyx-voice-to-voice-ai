@@ -8,8 +8,9 @@
         "esModuleInterop": true,
         "skipLibCheck": true,
         "forceConsistentCasingInFileNames": true,
-        "moduleResolution": "node",
+        "moduleResolution": "node"
     },
     "include": ["src/**/*", "dist"],
-    "exclude": ["node_modules"]
+    "exclude": ["node_modules"],
+    "typeRoots": ["./node_module/@types", "./src/types"]
 }

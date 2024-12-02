@@ -1,7 +1,10 @@
 import { Router } from "express";
 import { completion } from "../controllers/ai.controller";
+import { authMiddleware } from "../middleware/auth/authMiddleware";
 const aiRouter = Router();
 
-aiRouter.route("/completion").post(completion);
+// how to add authMiddleware only for this route
+// aiRouter.route("/completion").post(completion);
+aiRouter.route("/completion").post(authMiddleware, completion);
 
 export default aiRouter;

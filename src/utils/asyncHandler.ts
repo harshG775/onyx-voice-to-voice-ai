@@ -4,7 +4,7 @@ type AsyncFunction = (req: Request, res: Response, next: NextFunction) => Promis
 
 // asyncHandler: Use this if you want to directly handle errors and send a custom response without relying on centralized error handling.
 export const asyncHandler = (fn: AsyncFunction) => {
-    return async (req: Request, res: Response, next: NextFunction) => {
+    return async (req: Request, res: Response, next: NextFunction): Promise<void> => {
         try {
             await fn(req, res, next);
         } catch (error: any) {

@@ -10,6 +10,7 @@ import { loggerMiddleware } from "./middleware/loggerMiddleware";
 // routes import
 import healthRouter from "./routes/health.routes";
 import aiRouter from "./routes/ai.routes";
+import usersRouter from "./routes/users.routes";
 
 const app = express();
 
@@ -24,6 +25,7 @@ app.use(morgan("dev"));
 app.use(loggerMiddleware);
 
 app.use("/health", healthRouter);
+app.use("/users", usersRouter);
 app.use("/api/v1/ai/", aiRouter);
 
 app.use("*", notFound);
