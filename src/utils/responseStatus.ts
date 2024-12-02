@@ -22,12 +22,9 @@ const responseStatus = {
     serverError: (res: Response, message: string = "Internal Server Error") => res.status(HttpStatusCodes.INTERNAL_SERVER_ERROR).json({ success: false, message }),
 
     message: (res: Response, statusCode: number, message: string) => res.status(statusCode).json({ message }),
+
+    deleted: (res: Response, data: ResponseData = {}) => res.status(HttpStatusCodes.NO_CONTENT).json({ success: true, ...data }),
     
-    streamPipe: (res: Response, stream: Readable, statusCode: number = HttpStatusCodes.OK, contentType: string = "application/octet-stream") => {
-        res.status(statusCode);
-        res.setHeader("Content-Type", contentType);
-        stream.pipe(res);
-    },
 };
 
 export default responseStatus;

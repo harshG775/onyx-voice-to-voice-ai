@@ -31,7 +31,7 @@ model History {
     createdAt DateTime  @default(now())
     updatedAt DateTime  @updatedAt
     userId    String
-    user      User      @relation(fields: [userId], references: [id])
+    user      User      @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
 model Message {
@@ -41,5 +41,5 @@ model Message {
     createdAt DateTime @default(now())
     updatedAt DateTime @updatedAt
     historyId String
-    history   History  @relation(fields: [historyId], references: [id])
+    history   History  @relation(fields: [historyId], references: [id], onDelete: Cascade)
 }
