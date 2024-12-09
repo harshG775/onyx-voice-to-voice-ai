@@ -113,5 +113,5 @@ export const deleteHistory = asyncHandler(async (req: Request, res: Response) =>
         return;
     }
 
-    responseStatus.deleted(res, { message: "history deleted" });
+    responseStatus.deleted(res);
 });

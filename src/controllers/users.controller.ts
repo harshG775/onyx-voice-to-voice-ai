@@ -3,7 +3,8 @@ import { asyncHandler } from "../utils/asyncHandler";
 import responseStatus from "../utils/responseStatus";
 import { createAccessToken } from "../utils/jwt";
 
-import { PrismaClient } from "@prisma/client";
+import { PrismaClient, User } from "@prisma/client";
+import { comparePassword, hashPassword } from "../utils/encryption";
 const prisma = new PrismaClient();
 
 export const login = asyncHandler(async (req: Request, res: Response) => {
@@ -11,10 +12,16 @@ export const login = asyncHandler(async (req: Request, res: Response) => {
     if (!email || !password) {
         return responseStatus.badRequest(res, "email and password are required");
     }
+    //
+    const hashedPassword = await hashPassword(password);
+
+    const isCorrectPassword = await comparePassword(password, hashedPassword);
+    if (!isCorrectPassword) {
+        return responseStatus.unauthorized(res, "incorrect password");
+    }
     const user = await prisma.user.findUnique({
         where: {
             email,
-            password,
         },
     });
     if (!user) {
@@ -25,3 +32,34 @@ export const login = asyncHandler(async (req: Request, res: Response) => {
         token,
     });
 });
+
+export const register = asyncHandler(async (req: Request, res: Response) => {
+    const { email, password, name } = req.body;
+    if (!email || !password || !name) {
+        return responseStatus.badRequest(res, "email and password are required");
+    }
+
+    const hashedPassword = await hashPassword(password);
+    let newUser = null;
+    try {
+        newUser = await prisma.user.create({
+            data: {
+                name,
+                email,
+                password: hashedPassword,
+            },
+        });
+    } catch (error) {
+        console.log(error);
+        newUser = null;
+    }
+    if (!newUser) {
+        return responseStatus.notFound(res, "user already exists");
+    }
+    const token = createAccessToken(newUser);
+    responseStatus.created(res, {
+        token,
+    });
+});
+
+
