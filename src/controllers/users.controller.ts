@@ -54,7 +54,7 @@ export const register = asyncHandler(async (req: Request, res: Response) => {
         newUser = null;
     }
     if (!newUser) {
-        return responseStatus.notFound(res, "user already exists");
+        return responseStatus.conflict(res, "user already exists");
     }
     const token = createAccessToken(newUser);
     responseStatus.created(res, {
