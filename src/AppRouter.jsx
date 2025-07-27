@@ -5,6 +5,7 @@ import NotFoundPage from "./routes/not-found";
 import Loading from "./routes/loading";
 import RootLayout from "./routes/layout";
 import RootPage from "./routes/page";
+import Providers from "./components/providers/providers";
 
 export default function AppRouter() {
     const router = createBrowserRouter([
@@ -12,11 +13,13 @@ export default function AppRouter() {
             path: "/",
             element: (
                 <ErrorBoundary>
-                    <RootLayout>
-                        <Suspense fallback={<Loading />}>
-                            <Outlet />
-                        </Suspense>
-                    </RootLayout>
+                    <Providers>
+                        <RootLayout>
+                            <Suspense fallback={<Loading />}>
+                                <Outlet />
+                            </Suspense>
+                        </RootLayout>
+                    </Providers>
                 </ErrorBoundary>
             ),
             children: [
