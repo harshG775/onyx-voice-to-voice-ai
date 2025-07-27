@@ -1,7 +1,4 @@
-"use client";
-
 import { Component } from "react";
-
 export class ErrorBoundary extends Component {
     constructor(props) {
         super(props);
