@@ -1,10 +1,10 @@
 import { Suspense } from "react";
 import { createBrowserRouter, Outlet, RouterProvider } from "react-router";
+import { ErrorBoundary } from "./ErrorBoundary";
 import NotFoundPage from "./routes/not-found";
 import Loading from "./routes/loading";
 import RootLayout from "./routes/layout";
 import RootPage from "./routes/page";
-import { ErrorBoundary } from "./ErrorBoundary";
 
 export default function AppRouter() {
     const router = createBrowserRouter([
