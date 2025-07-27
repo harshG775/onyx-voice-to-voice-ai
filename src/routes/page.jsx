@@ -45,14 +45,16 @@ export default function RootPage() {
 }
 
 function BottomBar({ setMessage }) {
-    const recognitionRef = useRef(null);
-    const silenceTimerRef = useRef(null);
+    const [transcript, setTranscript] = useState("");
 
     const [isListening, setIsListening] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
+    
+    const recognitionRef = useRef(null);
+    const silenceTimerRef = useRef(null);
+    
 
-    const [transcript, setTranscript] = useState("");
-
+    
     const handleStartListening = () => {
         recognitionRef?.current?.start();
     };
